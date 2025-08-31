@@ -944,44 +944,96 @@ form input:focus, form textarea:focus {
 }
 html {
   scroll-behavior: smooth;
-}
+}/* Education Section Animations */
 .education {
   padding: 50px 20px;
   background-color: rgb(0, 0, 0);
   text-align: center;
-  scroll-margin-top:100px;
-  
+  scroll-margin-top: 100px;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Animate section title */
+.education .sub-title {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideIn 1s forwards;
+}
+
+.education .sub-title span {
+  color: #00eeff;
+}
+
+/* Education container fade-in */
 .education-container {
-  display:grid;
-  flex-wrap: wrap;
+  display: grid;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+  opacity: 0;
+  animation: fadeSlideIn 1s 0.3s forwards;
+}
+
+/* Education cards with hover and entrance animation */
+/* =================== EDUCATION SECTION =================== */
+.education {
+  padding: 50px 20px;
+  background-color: rgb(0, 0, 0);
+  text-align: center;
+  scroll-margin-top: 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Section title animation */
+.education .sub-title {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideIn 1s forwards;
+}
+
+.education .sub-title span {
+  color: #00eeff;
+}
+
+/* Education container */
+.education-container {
+  display: grid;
   justify-content: center;
   gap: 30px;
   margin-top: 30px;
 }
 
+/* =================== EDUCATION CARDS =================== */
 .education-card {
-    background-color: #111;
+  background-color: #111;
   border-radius: 15px;
   width: 600px;
   box-shadow: 0 0 15px #00eeff;
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   color: #ccc;
   text-align: left;
   padding: 10px;
-  
+  opacity: 0;
 }
 
+/* Card hover effect */
 .education-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 10px 30px #00eeff;
 }
 
+/* Card text */
 .education-card h3 {
   font-size: 20px;
-  color:#00eeff;
+  color: #00eeff;
   margin-bottom: 10px;
 }
 
@@ -995,18 +1047,103 @@ html {
   font-size: 14px;
   color: #d3cfcf;
 }
-.education .sub-title span {
-  color: #00eeff;
- 
+
+/* =================== ANIMATIONS =================== */
+/* Fade + slide-in for title */
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.education .sub-title {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
+
+/* Slide-in from left */
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
-.contact p{
-  font-size: 1 rem;
-  font-weight: 550;
-  margin-bottom: 30px;
+
+/* Slide-in from right */
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
-/* contact form */
-/* From Uiverse.io by vinodjangid07 */ 
+
+/* Assign left/right animations with staggered delays */
+.education-card:nth-child(1) { 
+  animation: slideInLeft 0.8s forwards; 
+  animation-delay: 0.3s;
+}
+.education-card:nth-child(2) { 
+  animation: slideInRight 0.8s forwards; 
+  animation-delay: 0.5s;
+}
+.education-card:nth-child(3) { 
+  animation: slideInLeft 0.8s forwards; 
+  animation-delay: 0.7s;
+}
+/* Add more cards as needed, alternating left/right */
+
+/* =================== MEDIA QUERIES =================== */
+/* Tablets (up to 1024px) */
+@media (max-width: 1024px) {
+  .education-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .education-card {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .education-card h3 { font-size: 18px; }
+  .education-card .institution { font-size: 15px; }
+  .education-card .duration,
+  .education-card .score { font-size: 13px; }
+  
+  .education .sub-title { font-size: 2rem; }
+}
+
+/* Mobile (up to 600px) */
+@media (max-width: 600px) {
+  .education {
+    padding: 30px 10px;
+  }
+
+  .education-container {
+    gap: 15px;
+  }
+
+  .education-card {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .education-card h3 { font-size: 16px; }
+  .education-card .institution { font-size: 14px; }
+  .education-card .duration,
+  .education-card .score { font-size: 12px; }
+
+  .education .sub-title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+  }
+}
