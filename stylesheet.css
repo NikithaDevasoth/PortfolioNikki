@@ -159,13 +159,21 @@ nav::-webkit-scrollbar-thumb {
     
 }
 
+.about-img {
+  position: relative;
+  display: inline-block;
+}
+
+
+/* Rotating gradient border */
 .about-img img {
     
     height: 300px;
     width: 300px;
     border-radius: 50%;
-     box-shadow: 0 0 10px #00eeff88;
+    box-shadow: 0 0 10px #00eeff88;
 }
+
 .role1 {
   color:tomato;
   text-shadow: 0 0 5px rgb(176, 21, 138);
@@ -200,8 +208,30 @@ nav::-webkit-scrollbar-thumb {
     color: #ccc;
     line-height: 1.6;
     margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+/*animation to about/
+
+.about-text p span {
+  display: block;        /* each line as a block */
+ 
+.about-text p span {
+  display: block;        /* each line as a block */
+  transform: translateX(100px); /* start off-screen right */
+  opacity: 0;
+  animation: slideInRight 0.6s forwards;
 }
 
+.about-text p span:nth-child(1) { animation-delay: 0.2s; }
+.about-text p span:nth-child(2) { animation-delay: 0.4s; }
+.about-text p span:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes slideInRight {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 /* Services Section */
 .services {
     background-color: #111;

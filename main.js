@@ -51,3 +51,52 @@ document.getElementById("contactForm").addEventListener("submit", async function
     const data = await res.json();
     document.getElementById("responseMsg").innerText = data.message;
 });
+//ABOUT
+function wrapLines(element) {
+    const text = element.innerText;
+    element.innerHTML = "";
+    const words = text.split(" ");
+    let line = document.createElement("span");
+    line.className = "line";
+    element.appendChild(line);
+
+    words.forEach((word) => {
+        const testLine = line.cloneNode();
+        testLine.innerText = line.innerText + (line.innerText ? " " : "") + word;
+        element.appendChild(testLine);
+
+        const originalHeight = element.clientHeight;
+        line.innerText += (line.innerText ? " " : "") + word;
+        const newHeight = element.clientHeight;
+
+        if (newHeight > originalHeight) {
+            line.innerText = line.innerText.replace(" " + word, "");
+            line = document.createElement("span");
+            line.className = "line";
+            line.innerText = word;
+            element.appendChild(line);
+        }
+    });
+}
+
+const paragraph = document.getElementById("about-paragraph");
+wrapLines(paragraph);
+
+const lines = document.querySelectorAll("#about-paragraph .line");
+
+const observer = new IntersectionObserver(
+    (entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                lines.forEach((line, index) => {
+                    line.style.animationDelay = `${index * 0.25}s`; // smooth stagger
+                    line.style.animationPlayState = "running";
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    },
+    { threshold: 0.2 }
+);
+
+observer.observe(document.getElementById("about"));
